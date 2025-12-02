@@ -1,0 +1,11 @@
+mod day01;
+use std::env;
+
+fn main() {
+	let day = env::args().nth(1).expect("Please specify a day to run");
+
+	match day.as_str() {
+		"day01" => day01::main(),
+		_ => panic!("solution for that day does not exist"),
+	}
+}

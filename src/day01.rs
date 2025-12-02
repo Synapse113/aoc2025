@@ -4,7 +4,7 @@ pub fn main() {
 	let input_text = fs::read_to_string("./inputs/day01.txt")
 		.unwrap()
 		.replace("L", "-")
-		.replace("R", "+");
+		.replace("R", "");
 
 	let count = input_text.lines().fold((50, 0), |mut acc, line| {
 		let clicks: i32 = line.parse().unwrap();

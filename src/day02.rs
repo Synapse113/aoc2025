@@ -1,5 +1,33 @@
 use std::fs;
 
+fn get_substrings(s: &str) -> bool {
+	let halflen = (s.len() as f64 / 2.0).floor() as usize;
+
+	for i in (0..halflen).rev() {
+		let sub = &s[0..=i];
+
+		// need to be able to divide evenly
+		if s.len() % sub.len() != 0 {
+			continue;
+		}
+
+		for j in 0..s.len() / sub.len() {
+			let index = j * sub.len();
+			let sub2 = &s[index..index + sub.len()];
+
+			if sub2 != sub {
+				break;
+			}
+
+			if index + sub.len() == s.len() {
+				return true;
+			}
+		}
+	}
+
+	false
+}
+
 pub fn main() {
 	let input_text = fs::read_to_string("./inputs/day02.txt").unwrap();
 	let id_ranges = input_text.trim().split(",");
@@ -9,20 +37,11 @@ pub fn main() {
 		let r: Vec<&str> = range.split("-").collect();
 		let start: i64 = r[0].parse().unwrap();
 		let end: i64 = r[1].parse().unwrap();
-		let numeric_range = start..=end;
 
-		for n in numeric_range {
+		for n in start..=end {
 			let s = n.to_string();
 
-			// if the number is an odd number of digits then skip
-			if s.len() % 2 != 0 {
-				continue;
-			}
-
-			// compare halves
-			let halves = s.split_at(s.len() / 2);
-
-			if halves.0 == halves.1 {
+			if get_substrings(&s) {
 				invalid += n;
 			}
 		}

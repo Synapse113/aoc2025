@@ -1,18 +1,18 @@
 use std::fs;
 
-fn is_invalid(s: &str) -> bool {
-	let halflen = s.len() / 2;
+fn is_invalid(num: &str) -> bool {
+	let halflen = num.len() / 2;
 
 	for i in (0..halflen).rev() {
-		let sub = &s[0..=i];
+		let sub = &num[0..=i];
 
-		if s.len() % sub.len() != 0 {
+		if num.len() % sub.len() != 0 {
 			continue;
 		}
 
-		let sub2 = sub.repeat(s.len() / sub.len());
+		let repeated_substring = sub.repeat(num.len() / sub.len());
 
-		if sub2 == s {
+		if repeated_substring == num {
 			return true;
 		}
 	}
@@ -30,11 +30,11 @@ pub fn main() {
 		let start: i64 = r[0].parse().unwrap();
 		let end: i64 = r[1].parse().unwrap();
 
-		for n in start..=end {
-			let s = n.to_string();
+		for num in start..=end {
+			let s = num.to_string();
 
 			if is_invalid(&s) {
-				invalid_sum += n;
+				invalid_sum += num;
 			}
 		}
 	}

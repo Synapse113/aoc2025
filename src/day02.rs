@@ -6,22 +6,14 @@ fn is_invalid(s: &str) -> bool {
 	for i in (0..halflen).rev() {
 		let sub = &s[0..=i];
 
-		// need to be able to divide evenly
 		if s.len() % sub.len() != 0 {
 			continue;
 		}
 
-		for j in 0..s.len() / sub.len() {
-			let index = j * sub.len();
-			let sub2 = &s[index..index + sub.len()];
+		let sub2 = sub.repeat(s.len() / sub.len());
 
-			if sub2 != sub {
-				break;
-			}
-
-			if index + sub.len() == s.len() {
-				return true;
-			}
+		if sub2 == s {
+			return true;
 		}
 	}
 

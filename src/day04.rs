@@ -52,6 +52,7 @@ pub fn main() {
 				}
 			}
 		}
+
 		grid = new_grid.clone();
 	}
 

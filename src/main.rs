@@ -2,6 +2,7 @@ mod day01;
 mod day02;
 mod day03;
 mod day04;
+mod day05;
 use std::env;
 
 fn main() {
@@ -12,6 +13,7 @@ fn main() {
 		"day02" => day02::main(),
 		"day03" => day03::main(),
 		"day04" => day04::main(),
+		"day05" => day05::main(),
 		_ => panic!("solution for that day does not exist"),
 	}
 }
